@@ -1,0 +1,7 @@
+# Zig libc 配置文件
+# 指定 musl libc 的头文件路径
+
+include_dir=C:/Program Files/zig/lib/libc/include/any-linux-any
+include_dir=C:/Program Files zig/lib/libc/include/generic-glibc
+include_dir=C:/Program Files zig/lib/libc/include/aarch64-linux-musl
+include_dir=C:/Program Files zig/lib/libc/include/arm-linux-musleabihf
