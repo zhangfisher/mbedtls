@@ -1,0 +1,123 @@
+install
++- install mbedtls_linux_arm32_webrtc
+   +- compile lib mbedtls_linux_arm32_webrtc ReleaseSmall arm-linux-musleabihf
+      +- compile lib mbedx509_linux_arm32_webrtc ReleaseSmall arm-linux-musleabihf 24 errors
+E:\Work\Code\zig\mbedtls\library/mbedtls_check_config.h:273:2: error: "MBEDTLS_X509_CRT_PARSE_C defined, but not all prerequisites"
+#error "MBEDTLS_X509_CRT_PARSE_C defined, but not all prerequisites"
+ ^
+E:\Work\Code\zig\mbedtls\library\mbedtls_config.c:38:10: note: in file included from E:\Work\Code\zig\mbedtls\library\mbedtls_config.c:38:
+#include "mbedtls_check_config.h"
+         ^
+E:\Work\Code\zig\mbedtls\library/mbedtls_check_config.h:277:2: error: "MBEDTLS_X509_CRL_PARSE_C defined, but not all prerequisites"
+#error "MBEDTLS_X509_CRL_PARSE_C defined, but not all prerequisites"
+ ^
+E:\Work\Code\zig\mbedtls\library\mbedtls_config.c:38:10: note: in file included from E:\Work\Code\zig\mbedtls\library\mbedtls_config.c:38:
+#include "mbedtls_check_config.h"
+         ^
+E:\Work\Code\zig\mbedtls\library/mbedtls_check_config.h:285:2: error: "MBEDTLS_X509_CRT_WRITE_C defined, but not all prerequisites"
+#error "MBEDTLS_X509_CRT_WRITE_C defined, but not all prerequisites"
+ ^
+E:\Work\Code\zig\mbedtls\library\mbedtls_config.c:38:10: note: in file included from E:\Work\Code\zig\mbedtls\library\mbedtls_config.c:38:
+#include "mbedtls_check_config.h"
+         ^
+E:\Work\Code\zig\mbedtls\library\x509_crt.c:1414:9: error: call to undeclared library function 'strstr' with type 'char *(const char *, const char *)'; ISO C99 and later do not support implicit function declarations
+        strstr((const char *) buf, "-----BEGIN CERTIFICATE-----") != NULL) {
+        ^
+E:\Work\Code\zig\mbedtls\library\x509_crt.c:1414:9: note: include the header <string.h> or explicitly provide a declaration for 'strstr'
+        strstr((const char *) buf, "-----BEGIN CERTIFICATE-----") != NULL) {
+        ^
+E:\Work\Code\zig\mbedtls\library\x509_crt.c:1528:5: error: use of undeclared identifier 'WCHAR'
+    WCHAR szDir[MAX_PATH];
+    ^
+E:\Work\Code\zig\mbedtls\library\x509_crt.c:1529:19: error: use of undeclared identifier 'MAX_PATH'
+    char filename[MAX_PATH];
+                  ^
+E:\Work\Code\zig\mbedtls\library\x509_crt.c:1533:5: error: use of undeclared identifier 'WIN32_FIND_DATAW'
+    WIN32_FIND_DATAW file_data;
+    ^
+E:\Work\Code\zig\mbedtls\library\x509_crt.c:1536:15: error: use of undeclared identifier 'MAX_PATH'
+    if (len > MAX_PATH - 3) {
+              ^
+E:\Work\Code\zig\mbedtls\library\x509_crt.c:1540:12: error: use of undeclared identifier 'szDir'
+    memset(szDir, 0, sizeof(szDir));
+           ^
+E:\Work\Code\zig\mbedtls\library\x509_crt.c:1540:29: error: use of undeclared identifier 'szDir'
+    memset(szDir, 0, sizeof(szDir));
+                            ^
+E:\Work\Code\zig\mbedtls\library\x509_crt.c:1541:25: error: use of undeclared identifier 'MAX_PATH'
+    memset(filename, 0, MAX_PATH);
+                        ^
+E:\Work\Code\zig\mbedtls\library\x509_crt.c:1552:13: error: call to undeclared function 'MultiByteToWideChar'; ISO C99 and later do not support implicit function declarations
+    w_ret = MultiByteToWideChar(CP_ACP, 0, filename, (int) len, szDir,
+            ^
+E:\Work\Code\zig\mbedtls\library\x509_crt.c:1552:33: error: use of undeclared identifier 'CP_ACP'
+    w_ret = MultiByteToWideChar(CP_ACP, 0, filename, (int) len, szDir,
+                                ^
+E:\Work\Code\zig\mbedtls\library\x509_crt.c:1552:65: error: use of undeclared identifier 'szDir'
+    w_ret = MultiByteToWideChar(CP_ACP, 0, filename, (int) len, szDir,
+                                                                ^
+E:\Work\Code\zig\mbedtls\library\x509_crt.c:1553:33: error: use of undeclared identifier 'MAX_PATH'
+                                MAX_PATH - 3);
+                                ^
+E:\Work\Code\zig\mbedtls\library\x509_crt.c:1558:13: error: call to undeclared function 'FindFirstFileW'; ISO C99 and later do not support implicit function declarations
+    hFind = FindFirstFileW(szDir, &file_data);
+            ^
+E:\Work\Code\zig\mbedtls\library\x509_crt.c:1558:28: error: use of undeclared identifier 'szDir'
+    hFind = FindFirstFileW(szDir, &file_data);
+                           ^
+E:\Work\Code\zig\mbedtls\library\x509_crt.c:1558:36: error: use of undeclared identifier 'file_data'
+    hFind = FindFirstFileW(szDir, &file_data);
+                                   ^
+E:\Work\Code\zig\mbedtls\library\x509_crt.c:1563:11: error: use of undeclared identifier 'MAX_PATH'
+    len = MAX_PATH - len;
+          ^
+E:\Work\Code\zig\mbedtls\library\x509_crt.c:1567:13: error: use of undeclared identifier 'file_data'
+        if (file_data.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) {
+            ^
+E:\Work\Code\zig\mbedtls\library\x509_crt.c:1570:17: error: call to undeclared function 'WideCharToMultiByte'; ISO C99 and later do not support implicit function declarations
+        w_ret = WideCharToMultiByte(CP_ACP, 0, file_data.cFileName,
+                ^
+E:\Work\Code\zig\mbedtls\library\x509_crt.c:1570:37: error: use of undeclared identifier 'CP_ACP'
+        w_ret = WideCharToMultiByte(CP_ACP, 0, file_data.cFileName,
+                                    ^
+:1:1: error: too many errors emitted, stopping now
+E:\Work\Code\zig\mbedtls\library\x509write_crt.c:116:5: error: call to undeclared library function 'strncpy' with type 'char *(char *, const char *, unsigned int)'; ISO C99 and later do not support implicit function declarations
+    strncpy(ctx->not_before, not_before, MBEDTLS_X509_RFC5280_UTC_TIME_LEN);
+    ^
+E:\Work\Code\zig\mbedtls\library\x509write_crt.c:116:5: note: include the header <string.h> or explicitly provide a declaration for 'strncpy'
+    strncpy(ctx->not_before, not_before, MBEDTLS_X509_RFC5280_UTC_TIME_LEN);
+    ^
+error: 24 compilation errors
+failed command: "C:\\Program Files\\zig\\zig.exe" build-lib -cflags -std=c99 -- "E:\\Work\\Code\\zig\\mbedtls\\library\\mbedtls_config.c" -cflags -std=c99 -- "E:\\Work\\Code\\zig\\mbedtls\\library\\pkcs7.c" -cflags -std=c99 -- "E:\\Work\\Code\\zig\\mbedtls\\library\\x509.c" -cflags -std=c99 -- "E:\\Work\\Code\\zig\\mbedtls\\library\\x509_create.c" -cflags -std=c99 -- "E:\\Work\\Code\\zig\\mbedtls\\library\\x509_crl.c" -cflags -std=c99 -- "E:\\Work\\Code\\zig\\mbedtls\\library\\x509_crt.c" -cflags -std=c99 -- "E:\\Work\\Code\\zig\\mbedtls\\library\\x509_csr.c" -cflags -std=c99 -- "E:\\Work\\Code\\zig\\mbedtls\\library\\x509_oid.c" -cflags -std=c99 -- "E:\\Work\\Code\\zig\\mbedtls\\library\\x509write.c" -cflags -std=c99 -- "E:\\Work\\Code\\zig\\mbedtls\\library\\x509write_crt.c" -cflags -std=c99 -- "E:\\Work\\Code\\zig\\mbedtls\\library\\x509write_csr.c" -OReleaseSmall -target arm-linux-musleabihf -mcpu baseline -I "E:\\Work\\Code\\zig\\mbedtls\\include" -I "E:\\Work\\Code\\zig\\mbedtls\\library" -I "E:\\Work\\Code\\zig\\mbedtls\\tf-psa-crypto\\include" -I "E:\\Work\\Code\\zig\\mbedtls\\tf-psa-crypto\\core" -I "E:\\Work\\Code\\zig\\mbedtls\\tf-psa-crypto\\core\\compat" -I "E:\\Work\\Code\\zig\\mbedtls\\tf-psa-crypto\\dispatch" -I "E:\\Work\\Code\\zig\\mbedtls\\tf-psa-crypto\\platform" -I "E:\\Work\\Code\\zig\\mbedtls\\tf-psa-crypto\\utilities" -I "E:\\Work\\Code\\zig\\mbedtls\\tf-psa-crypto\\drivers\\builtin\\include" -I "E:\\Work\\Code\\zig\\mbedtls\\tf-psa-crypto\\drivers\\builtin\\src" -I "E:\\Work\\Code\\zig\\mbedtls\\tf-psa-crypto\\extras" -I ".zig-cache\\o\\2fb5824d4233e9fe32370ab196a5b16d" -DMBEDTLS_BIGNUM_C=1 -DMBEDTLS_ECP_C=1 -DMBEDTLS_ECP_DP_SECP256R1_ENABLED=1 -DMBEDTLS_ECP_DP_SECP384R1_ENABLED=1 -DPSA_WANT_ALG_SHA_256=1 -DPSA_WANT_ALG_SHA_512=1 -D_WIN32=1 -D_WIN64=1 -DMBEDTLS_X509_CRT_PARSE_C= -DMBEDTLS_X509_CRT_WRITE_C= -DMBEDTLS_X509_CRL_PARSE_C= -DMBEDTLS_PEM_PARSE_C= -DMBEDTLS_PEM_WRITE_C= -DMBEDTLS_CERTS_C= -DMBEDTLS_DEBUG_C= -DMBEDTLS_ECDH_C= -DMBEDTLS_KEY_EXCHANGE_RSA_ENABLED= -DMBEDTLS_KEY_EXCHANGE_DHE_RSA_ENABLED= -DMBEDTLS_KEY_EXCHANGE_ECDH_ECDSA_ENABLED=1 -DMBEDTLS_KEY_EXCHANGE_ECDHE_RSA_ENABLED=1 -Mroot --cache-dir .zig-cache --global-cache-dir "C:\\Users\\Administrator\\AppData\\Local\\zig" --name mbedx509_linux_arm32_webrtc -static --zig-lib-dir "C:\\Program Files\\zig\\lib\\" --listen=-
+
+install
++- install mbedx509_windows_x64_webrtc
+   +- compile lib mbedx509_windows_x64_webrtc ReleaseSmall x86_64-windows-gnu 24 errors
+E:\Work\Code\zig\mbedtls\library/mbedtls_check_config.h:273:2: error: "MBEDTLS_X509_CRT_PARSE_C defined, but not all prerequisites"
+#error "MBEDTLS_X509_CRT_PARSE_C defined, but not all prerequisites"
+ ^
+E:\Work\Code\zig\mbedtls\library\mbedtls_config.c:38:10: note: in file included from E:\Work\Code\zig\mbedtls\library\mbedtls_config.c:38:
+#include "mbedtls_check_config.h"
+         ^
+E:\Work\Code\zig\mbedtls\library/mbedtls_check_config.h:277:2: error: "MBEDTLS_X509_CRL_PARSE_C defined, but not all prerequisites"
+#error "MBEDTLS_X509_CRL_PARSE_C defined, but not all prerequisites"
+ ^
+E:\Work\Code\zig\mbedtls\library\mbedtls_config.c:38:10: note: in file included from E:\Work\Code\zig\mbedtls\library\mbedtls_config.c:38:
+#include "mbedtls_check_config.h"
+         ^
+E:\Work\Code\zig\mbedtls\library/mbedtls_check_config.h:285:2: error: "MBEDTLS_X509_CRT_WRITE_C defined, but not all prerequisites"
+#error "MBEDTLS_X509_CRT_WRITE_C defined, but not all prerequisites"
+ ^
+E:\Work\Code\zig\mbedtls\library\mbedtls_config.c:38:10: note: in file included from E:\Work\Code\zig\mbedtls\library\mbedtls_config.c:38:
+#include "mbedtls_check_config.h"
+         ^
+E:\Work\Code\zig\mbedtls\library\x509_crt.c:1414:9: error: call to undeclared library function 'strstr' with type 'char *(const char *, const char *)'; ISO C99 and later do not support implicit function declarations
+        strstr((const char *) buf, "-----BEGIN CERTIFICATE-----") != NULL) {
+        ^
+E:\Work\Code\zig\mbedtls\library\x509_crt.c:1414:9: note: include the header <string.h> or explicitly provide a declaration for 'strstr'
+        strstr((const char *) buf, "-----BEGIN CERTIFICATE-----") != NULL) {
+        ^
+E:\Work\Code\zig\mbedtls\library\x509_crt.c:1528:5: error: use of undeclared identifier 'WCHAR'
+    WCHAR szDir[MAX_PATH];
+    ^
+E:\Work\Code\zig\mbedtls\library\x509_crt.c:1529:19: error: use of undecl
