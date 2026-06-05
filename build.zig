@@ -72,9 +72,39 @@ fn installPublicHeaders(b: *std.Build) void {
         .install_subdir = "",
     });
 
+    // 安装密码学核心头文件（从 tf-psa-crypto/drivers/builtin/include/mbedtls）
+    // 这些头文件虽然标记为 private，但实际上是公共密码学 API
+    // 包括：ctr_drbg.h, hmac_drbg.h, entropy.h, aes.h, sha256.h, rsa.h 等
+    const crypto_headers_step = b.addInstallDirectory(.{
+        .source_dir = b.path("tf-psa-crypto/drivers/builtin/include/mbedtls"),
+        .install_dir = .{ .custom = "include/mbedtls" },
+        .install_subdir = "",
+    });
+
+    // 安装密码学辅助头文件（从 tf-psa-crypto/include/mbedtls）
+    // 这些头文件提供平台抽象和其他辅助功能
+    // 包括：platform_util.h, platform.h, asn1.h, base64.h, md.h, pk.h, pem.h 等
+    const crypto_util_headers_step = b.addInstallDirectory(.{
+        .source_dir = b.path("tf-psa-crypto/include/mbedtls"),
+        .install_dir = .{ .custom = "include/mbedtls" },
+        .install_subdir = "",
+    });
+
+    // 安装 tf-psa-crypto 库头文件（从 tf-psa-crypto/include/tf-psa-crypto）
+    // 这些头文件提供 tf-psa-crypto 库的版本信息和配置
+    // 包括：version.h, build_info.h, tf_psa_crypto_config_check_*.h 等
+    const tfpsacrypto_headers_step = b.addInstallDirectory(.{
+        .source_dir = b.path("tf-psa-crypto/include/tf-psa-crypto"),
+        .install_dir = .{ .custom = "include/tf-psa-crypto" },
+        .install_subdir = "",
+    });
+
     // 确保在主构建步骤中执行
     b.getInstallStep().dependOn(&mbedtls_headers.step);
     b.getInstallStep().dependOn(&psa_headers_step.step);
+    b.getInstallStep().dependOn(&crypto_headers_step.step);
+    b.getInstallStep().dependOn(&crypto_util_headers_step.step);
+    b.getInstallStep().dependOn(&tfpsacrypto_headers_step.step);
 }
 
 pub fn build(b: *std.Build) void {
@@ -530,9 +560,11 @@ fn setupX509CompileOptions(
     mod.addCMacro("PSA_WANT_ALG_SHA_256", "1");
     mod.addCMacro("PSA_WANT_ALG_SHA_512", "1");
 
-    // Windows 平台定义
-    mod.addCMacro("_WIN32", "1");
-    mod.addCMacro("_WIN64", "1");
+    // X.509 证书处理依赖
+    mod.addCMacro("MBEDTLS_ASN1_PARSE_C", "1");
+    mod.addCMacro("MBEDTLS_ASN1_WRITE_C", "1");
+    mod.addCMacro("MBEDTLS_PK_PARSE_C", "1");
+    mod.addCMacro("MBEDTLS_PK_WRITE_C", "1");
 
     // 添加源文件
     for (sources) |src| {
@@ -820,6 +852,10 @@ fn buildWindowsX64WebRTC(b: *std.Build) void {
     const src_x509_webrtc = [_][]const u8{
         "library/mbedtls_config.c",
         "library/x509.c",
+        "library/x509_crt.c",
+        "library/x509_crl.c",
+        "library/x509_csr.c",
+        "library/x509_create.c",
         "library/x509_oid.c",
     };
 
@@ -914,6 +950,10 @@ fn buildLinuxArm64WebRTC(b: *std.Build) void {
     const src_x509_webrtc = [_][]const u8{
         "library/mbedtls_config.c",
         "library/x509.c",
+        "library/x509_crt.c",
+        "library/x509_crl.c",
+        "library/x509_csr.c",
+        "library/x509_create.c",
         "library/x509_oid.c",
     };
 
@@ -1008,6 +1048,10 @@ fn buildLinuxArm32WebRTC(b: *std.Build) void {
     const src_x509_webrtc = [_][]const u8{
         "library/mbedtls_config.c",
         "library/x509.c",
+        "library/x509_crt.c",
+        "library/x509_crl.c",
+        "library/x509_csr.c",
+        "library/x509_create.c",
         "library/x509_oid.c",
     };
 
@@ -1228,6 +1272,10 @@ fn buildLinuxX64MuslWebRTC(b: *std.Build) void {
     const src_x509_webrtc = [_][]const u8{
         "library/mbedtls_config.c",
         "library/x509.c",
+        "library/x509_crt.c",
+        "library/x509_crl.c",
+        "library/x509_csr.c",
+        "library/x509_create.c",
         "library/x509_oid.c",
     };
 
@@ -1322,6 +1370,10 @@ fn buildLinuxX64GnuWebRTC(b: *std.Build) void {
     const src_x509_webrtc = [_][]const u8{
         "library/mbedtls_config.c",
         "library/x509.c",
+        "library/x509_crt.c",
+        "library/x509_crl.c",
+        "library/x509_csr.c",
+        "library/x509_create.c",
         "library/x509_oid.c",
     };
 
